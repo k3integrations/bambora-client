@@ -32,6 +32,14 @@ module Bambora
       #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
       #   reports = Bambora::V1::ReportResource(client: client)
       #
+      #   search_query = {
+      #     name:       'Search',
+      #     start_date: start_date.beginning_of_day.strftime('%Y-%m-%dT%H:%M:%S'),
+      #     end_date:   end_date.end_of_day.strftime('%Y-%m-%dT%H:%M:%S'),
+      #     start_row:,
+      #     end_row:    start_row + page_size - 1,
+      #   }
+      #
       #   reports.post(search_query_data: search_query)
       #   # => {
       #   #   :records => [
@@ -100,7 +108,7 @@ module Bambora
       #
       # @return [Array] An array of hashes showing the transaction details.
       def post(search_query_data:)
-        client.post(path: sub_path, body: search_query_data, api_key: api_key)
+        client.post(path: sub_path, body: search_query_data, api_key: @api_key)
       end
     end
   end

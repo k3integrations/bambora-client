@@ -117,6 +117,29 @@ module Bambora
     # Retrieve a client to make requests to the Bank Payment Profiles endpoints.
     #
     # @example
+    #   reports = client.reports(api_key: <yourapikey>)
+    #
+    #   data = {
+    #     name: '',
+    #     start_date: '',
+    #     end_date: '',
+    #     start_row: '',
+    #     end_row: '',
+    #     criteria: [{ field: 1, operator: '', value: '' }],
+    #   }
+    #
+    #   reports.post(search_query_data: data)
+    #
+    # @param api_key [String] API key for the bank profiles endpoint.
+    #
+    # @return [Bambora::Bank::ReportResource]
+    def reports(api_key:)
+      @reports ||= Bambora::V1::ReportResource.new(client: json_client, api_key: api_key)
+    end
+
+    # Retrieve a client to make requests to the Bank Payment Profiles endpoints.
+    #
+    # @example
     #   profiles = client.bank_profiles(api_key: <yourapikey>)
     #
     #   data = {

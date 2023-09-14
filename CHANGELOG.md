@@ -1,4 +1,6 @@
 ## Unreleased
+- Add `Bambora::V1::ReportResource` class
+- Add `Bambora::V1::ReportResource#push` method
 
 - Add `Bambora::V1::PaymentResource#return_payment` method
 - Add `Bambora::V1::PaymentResource#void` method
@@ -8,6 +10,12 @@
 - Add `Bambora::V1::ProfileResource#get_profile_cards` method
 - Add `Bambora::V1::ProfileResource#update_profile_card` method
 - Add `Bambora::V1::ProfileResource#delete_profile_card` method
+
+## 0.6.0 (2023-05-02)
+
+- Updating minimum Ruby version to Ruby 2.7.7
+- Add test support for Ruby 3.0
+- Update Faraday to 2.0.1
 
 ## 0.5.0 (2023-01-04)
 
