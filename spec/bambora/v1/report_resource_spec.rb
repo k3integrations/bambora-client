@@ -111,6 +111,60 @@ module Bambora
           ).to have_been_made.once
         end
       end
+
+      describe '#settlement' do
+        before(:each) do
+          stub_request(:get, "#{base_url}/v1/reports/settlement?end_date=&start_date=").with(
+            headers: headers,
+          ).to_return(headers: response_headers, body: response_body.to_json.to_s)
+        end
+
+        let(:search_query) do
+          {
+            start_date: '',
+            end_date: '',
+          }
+        end
+
+        let(:response_body) do
+          {
+            merchant_id: 1,
+            transactions_date: "",
+            currency: "",
+            settlement_net_amount: 1,
+            settlement_state: "",
+            settlement_date: "",
+            approved_transaction_count: 1,
+            declined_transaction_count: 1,
+            sale_amount_total: 1,
+            returned_amount_total: 1,
+            chargebacks_count: 1,
+            chargebacks_amount_total: 1,
+            card_transaction_approved_rate: 1,
+            card_transaction_declined_rate: 1,
+            card_discount_rate: 1,
+            gst_tax_rate: 1,
+            approved_transaction_fee_total: 1,
+            declined_transaction_fee_total: 1,
+            discount_rate_fee_total: 1,
+            chargeback_fee_total: 1,
+            gst_tax_fee_total: 1,
+            reserves_held: 1,
+            reserves_released: 1,
+            reserves_forward: 1
+          }
+        end
+
+        it "GET's to the Bambora API" do
+          subject.settlement(search_query:)
+
+          expect(
+            a_request(:get, "#{base_url}/v1/reports/settlement?end_date=&start_date=").with(
+              headers: headers,
+            ),
+          ).to have_been_made.once
+        end
+      end
     end
   end
 end

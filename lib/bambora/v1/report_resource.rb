@@ -110,6 +110,54 @@ module Bambora
       def post(search_query_data:)
         client.post(path: sub_path, body: search_query_data, api_key: @api_key)
       end
+
+      ##
+      # Query for settlement reports between a date range
+      #
+      # @example
+      #
+      #   client = Bambora::Rest::JSONClient(base_url: '...', api_key: '...', merchant_id: '...')
+      #   reports = Bambora::V1::ReportResource(client: client)
+      #
+      #   search_query = {
+      #     start_date: start_date.beginning_of_day.strftime('%Y-%m-%dT%H:%M:%S'),
+      #     end_date:   end_date.end_of_day.strftime('%Y-%m-%dT%H:%M:%S'),
+      #   }
+      #
+      #   reports.settlemnt(search_query: search_query)body
+      #   data => [
+      #      {
+      #        merchant_id : number
+      #        transactions_date : string
+      #        currency : string
+      #        settlement_net_amount : number
+      #        settlement_state : string
+      #        settlement_date : string
+      #        approved_transaction_count : number
+      #        declined_transaction_count : number
+      #        sale_amount_total : number
+      #        returned_amount_total : number
+      #        chargebacks_count : number
+      #        chargebacks_amount_total : number
+      #        card_transaction_approved_rate : number
+      #        card_transaction_declined_rate : number
+      #        card_discount_rate : number
+      #        gst_tax_rate : number
+      #        approved_transaction_fee_total : number
+      #        declined_transaction_fee_total : number
+      #        discount_rate_fee_total : number
+      #        chargeback_fee_total : number
+      #        gst_tax_fee_total : number
+      #        reserves_held : number
+      #        reserves_released : number
+      #        reserves_forward : number
+      #      }
+      #   ]
+      #
+
+      def settlement(search_query:)
+        client.get(path: "#{sub_path}/settlement", params: search_query, api_key: @api_key)
+      end
     end
   end
 end
