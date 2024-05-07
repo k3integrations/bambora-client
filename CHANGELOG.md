@@ -11,6 +11,15 @@
 - Add `Bambora::V1::ProfileResource#update_profile_card` method
 - Add `Bambora::V1::ProfileResource#delete_profile_card` method
 
+## 0.7.0 (2024-02-06)
+
+- Drop support for Ruby 2
+- Updating minimum Ruby version to Ruby 3.0.5
+- Add test support for Ruby 3.1, 3.2, 3.3
+- Updated Rubocop to enforce 3.0.x conventions
+- Linting fixes
+- Update `BatchReportResource#batch_report_body` to allow `sub merchant id` to be received from `Bambora::Client` or `elements`
+
 ## 0.6.0 (2023-05-02)
 
 - Updating minimum Ruby version to Ruby 2.7.7

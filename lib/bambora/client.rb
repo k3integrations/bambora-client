@@ -12,6 +12,8 @@ require 'gyoku' # XML Builder
 require 'multiparty' # Multipart/mixed requests
 
 require 'bambora/client/version'
+require 'bambora/credentials'
+require 'bambora/errors'
 
 # Adapters
 require 'bambora/adapters/response'
@@ -45,6 +47,7 @@ require 'bambora/v1/report_resource'
 require 'bambora/bank/payment_profile_resource'
 require 'bambora/bank/batch_report_messages'
 require 'bambora/bank/batch_report_resource'
+require 'bambora/v1/reports/merchants'
 
 module Bambora
   ##
@@ -187,7 +190,7 @@ module Bambora
     #
     # @param api_key [String] API key for the bank profiles endpoint.
     #
-    # @return [Bambora::Bank::PaymentProfileResource]
+    # @return [Bambora::Bank::BatchReportResource]
     def batch_reports(api_key:)
       @batch_reports = Bambora::Bank::BatchReportResource.new(
         client: xml_client,
