@@ -179,6 +179,18 @@ module Bambora
         client.post(path: "#{sub_path}/#{customer_code}/cards", body: data, api_key: api_key)
       end
 
+      # Get a card associated with the specified payment profile.
+      #
+      # @param customer_code [String] A unique identifier for the associated payment profile.
+      # @param card_id [Integer] The card id to update.
+      #
+      # @return [Hash] Indicating success or failure of the operation.
+      #
+      # @see https://dev.na.bambora.com/docs/guides/payment_profiles/#retrieve-cards
+      def get_profile_card(customer_code:, card_id:)
+        client.get(path: "#{sub_path}/#{customer_code}/cards/#{card_id}", api_key: api_key)
+      end
+
       # Get a list of cards associated with the specified payment profile.
       #
       # @param customer_code [String] A unique identifier for the associated payment profile.

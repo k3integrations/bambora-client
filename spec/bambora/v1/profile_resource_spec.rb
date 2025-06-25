@@ -231,6 +231,43 @@ module Bambora
         end
       end
 
+      describe '#get_profile_card' do
+        before do
+          stub_request(:get, "#{base_url}/v1/profiles/#{customer_code}/cards/#{card_id}")
+            .with(headers: headers)
+            .to_return(headers: response_headers, body: response_body.to_json.to_s)
+        end
+
+        let(:customer_code) { 'asdf1234' }
+        let(:card_id) { 12 }
+        let(:headers) { { 'Authorization' => 'Passcode MTpmYWtla2V5' } }
+        let(:response_body) do
+          {
+            code: 1,
+						message: "Operation Successful",
+						customer_code: 'aaa111',
+            card: {
+              card_id: '1',
+              function: 'DEF',
+              name: 'Hup Podling',
+              number: '4030000010001234',
+              expiry_month: '12',
+              expiry_year: '23',
+              card_type: 'VI'
+            },
+          }
+        end
+
+        it 'performs GET request for profile data' do
+          subject.get_profile_card(customer_code: customer_code, card_id: card_id)
+
+          expect(
+            a_request(:get, "#{base_url}/v1/profiles/#{customer_code}/cards/#{card_id}")
+              .with(headers: headers),
+          ).to have_been_made.once
+        end
+      end
+
       describe '#get_profile_cards' do
         before do
           stub_request(:get, "#{base_url}/v1/profiles/#{customer_code}/cards")
